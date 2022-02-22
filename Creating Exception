@@ -1,0 +1,42 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+// Класс собственного сключения
+// Выбрасывается при вводе нечетных чисел
+class NotEvenException extends Exception {
+}
+
+public class main {
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int[] array = new int[10]; // array from 10 numbers
+
+        int i = 0;
+        while (i < array.length) { // untill the array is full
+            System.out.print("Enter the number: ");
+            try {
+                // filling the array with an even number
+                array[i] = readEvenInt();
+                ++i; // to the next element
+            } catch (NotEvenException e) {
+                // cathcing the exception
+                // if we entered an odd number
+                System.out.println("This number is not an even number");
+            }
+        }
+
+        System.out.println("\nEntered array of even numbers:");
+        System.out.println(Arrays.toString(array)); // showing the array
+    }
+
+    // Функция чтения целого числа с консоли. Function of reading the data from the keyboard
+    // Возвращает значение числа, если оно четное. Returns the number if it is even
+    // Иначе, выбрасывается исключение NotEvenException Otherwise the exception NotEvenException is thrown
+    private static int readEvenInt() throws NotEvenException {
+        int result = scanner.nextInt(); // read the number
+        if (result % 2 != 0) // checking if even 
+            throw new NotEvenException(); // throw the exception if the number is odd 
+        return result; //  return the even number
+    }
+}
